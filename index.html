@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <title>Polymer</title>
+  <meta name="viewport"
+    content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">       
+  <link rel="import" href="elements/lat-lng.html">
+
+<!-- STEP 2 -->
+  <link rel="import" href="elements/lat-lng.html">
+  <link rel="import" 
+  href="./bower_components/core-scaffold/core-scaffold.html">
+  <link rel="import" 
+  href="./bower_components/core-toolbar/core-toolbar.html">
+  
+<!-- STEP 3 -->
+  <link rel="import" 
+  href="./bower_components/google-map/google-map.html">
+
+  <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+
+  
+  </head>
+  <body fullbleed layout vertical>
+    <core-scaffold>
+      <core-header-panel navigation flex mode="seamed">
+        <core-toolbar>Application</core-toolbar>
+        <lat-lng id="myElement"></lat-lng>
+      </core-header-panel>
+      <div tool>Title</div>
+      <google-map fit fitToMarkers></google-map>
+    </core-scaffold>
+    <script>
+      var myElement = document.querySelector('#myElement');
+      var gmap = document.querySelector('google-map');
+      myElement.addEventListener('createMarker', function(e) {
+          var gMark = document.createElement('google-map-marker');
+          gMark.latitude = e.detail.lat;
+          gMark.longitude = e.detail.lng;
+          gmap.appendChild(gMark);
+       });
+    </script>
+  </body>
+</html>

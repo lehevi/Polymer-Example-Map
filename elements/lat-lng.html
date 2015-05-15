@@ -1,0 +1,42 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../bower_components/core-input/core-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<style>
+    html /deep/ input[is=core-input]{
+        width: 100%;
+        margin: 5px;
+    }
+    html /deep/ paper-button{
+        background: #526E9C;
+        color: white;
+    }
+</style>
+<polymer-element name="lat-lng" >
+   <template>
+      <div  vertical layout >
+        <label>Introduce tus coordenadas</label>
+        <input is="core-input" type="number" step="any" preventInvalidInput placeholder="Latitud" value="{{value}}" committedValue="{{latVal}}">
+        <input is="core-input" type="number" step="any" preventInvalidInput placeholder="Longitud" value="{{value2}}" committedValue="{{lngVal}}">
+        <paper-button raised on-click="{{buttonClick}}">Click Me</paper-button>
+       </div>
+   </template>
+  <script>
+    Polymer({
+      ready: function() {
+
+      },
+      buttonClick: function(){
+        this.latVal = parseFloat(this.latVal);
+        this.lngVal = parseFloat(this.lngVal);
+        if(this.latVal >= -180 && this.latVal <= 180 && this.lngVal >= -180 && this.lngVal <= 180 ){
+            this.fire('createMarker', {lat: this.latVal, lng: this.lngVal});
+        }
+      },
+      latValChanged: function(){
+            console.log("valor de lat cambio");
+       }
+      
+    });
+  </script>
+</polymer-element>
